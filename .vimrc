@@ -21,11 +21,6 @@ set autoread
 " }}
 
 " key mappings {{
-let mapleader=','
-nnoremap <c-l> gt
-nnoremap <c-h> gT
-nnoremap <leader>t :tabnew<CR>
-
 inoremap <c-h> <Left>
 inoremap <c-j> <Down>
 inoremap <c-k> <Up>
@@ -50,8 +45,10 @@ inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 " config for plugins {{
 execute pathogen#infect()
 
+" load NERDTree upon entering vim
 autocmd vimenter * NERDTree
 
+" open winManager automatically
 let g:winManagerAutoOpen=1
 
 " integrate nerdtree into winManager
@@ -66,12 +63,16 @@ endfunction
 let g:winManagerWindowLayout="NERDTree|TagList"
 nnoremap <C-n> :WMToggle<CR>
 
-" }}
-
 " Configurations for taglist
-let Tlist_Ctags_Cmd="/usr/bin/exCtags"
+let Tlist_Ctags_Cmd="/usr/bin/ctags"
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 let Tlist_Inc_Winwidth=1
 let Tlist_File_Fold_Auto_Close=1
 let Tlist_Show_Menu=1
+
+" Config for Ctags
+set tags+=./.git/tags
+" for generating ctags tag
+nnoremap <F5> :!ctags -R -f ./.git/tags --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=yes --exclude=.git .<CR>
+" }}
