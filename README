@@ -1,6 +1,6 @@
 This repository contains vim configuration files and several plugins for my daily programming use. 
 So I can maintain a consistent editing environment at different places through this repo.
 To use this:
-  1. Move the whole folder to the directory: ~/.vim
+  1. git clone --recursive git://github.com/wzm90/vimconf ~/.vim/
   2. Make a soft link for ~/.vimrc:
     ln -s ~/.vim/.vimrc ~/.vimrc
