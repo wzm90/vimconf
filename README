@@ -4,5 +4,4 @@ To use this:
   1. git clone --recursive git://github.com/wzm90/vimconf ~/.vim/
   2. Make a soft link for ~/.vimrc:
     ln -s ~/.vim/.vimrc ~/.vimrc
-  3. Notice: Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window
-     is disabled in winManager.
+  3. Notice: Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window is disabled in winManager.
