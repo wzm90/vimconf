@@ -118,7 +118,7 @@ if !exists('loaded_taglist')
 		" Config for Ctags
 		set tags+=./.git/tags
 		" for generating ctags tag
-		nnoremap <F5> :!ctags -R -f ./.git/tags --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=yes --exclude=.git .<CR>
+		nnoremap <F5> :!ctags -R -f .tags --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=yes --exclude=.git .<CR>
 	" }}
 
 	endif
