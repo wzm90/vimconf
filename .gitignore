@@ -1,0 +1,3 @@
+# ignore all installed plugins except vundle
+bundle/*
+!bundle/vundle/*

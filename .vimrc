@@ -3,70 +3,76 @@
 "     Zimin Wang
 "     simon.zmwang@gmail.com
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-colorscheme elflord
 
-"common configurations {{
-set number
+" Begin vundle configurations (https://github.com/gmarik/vundle)
+set nocompatible               " be iMproved
+filetype off                   " required!
 
-filetype plugin indent on
-autocmd FileType c setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab 
-autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
-autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-set laststatus=2
-set ruler
-set autoread
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
 
-" }}
-
-" key mappings {{
-inoremap <c-h> <Left>
-inoremap <c-j> <Down>
-inoremap <c-k> <Up>
-inoremap <c-l> <Right>
-" brackets completion
-inoremap { {}<Left>
-inoremap {<CR> {<CR>}<Up><Esc>o
-inoremap {{ {
-
-inoremap ( ()<Left>
-inoremap (( (
-" The following map doesn't work in versions prior to Vim 7.0
-inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
-
-inoremap [ []<Left>
-inoremap [[ [
-
-nnoremap <C-n> :WMToggle<CR>
-" The following map doesn't work in versions prior to Vim 7.0
-inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
-
-" }}
-
-" config for plugins {{
-execute pathogen#infect()
-
-" load NERDTree upon entering vim
-autocmd vimenter * NERDTree
-
-" open winManager automatically
-let g:winManagerAutoOpen=1
-
-" integrate nerdtree into winManager
-let g:NERDTree_title="[NERDTree]"
-function! NERDTree_Start()
-	execute "NERDTree"
-endfunction
-
-function! NERDTree_IsValid()
-	return 1
-endfunction
-
-" detect if the user has installed exuberant ctags
-" if not, disable Taglist
 "
-" The following are copied from taglist.vim
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" End vundle configurations
+
+
+" My Bundles
+Bundle 'scrooloose/nerdtree'
+Bundle 'winmanager'
+Bundle 'taglist.vim'
+"
+
+" Config for my bundles {{
+
+" Detect if the user has installed exuberant ctags
+" If not, do not load Taglist
+
+" The following function are adapted from taglist.vim
+function! DetectExuberantCtags()
+	if executable('exuberant-ctags')
+		" On Debian Linux, exuberant ctags is installed
+		" as exuberant-ctags
+		return 'exuberant-ctags'
+	elseif executable('exctags')
+		" On Free-BSD, exuberant ctags is installed as exctags
+		return 'exctags'
+	elseif executable('ctags')
+		" On some OS, ctags is installed instead of exuberant ctags
+		" by default
+		let check_ctags = 'ctags'. ' --version 2>&1|grep Exuberant'
+		if empty(system(check_ctags))
+			return 'null'
+		else
+			return 'ctags'
+		endif	
+	elseif executable('ctags.exe')
+		return 'ctags.exe'
+	elseif executable('tags')
+		" On some OS, ctags is installed instead of exuberant ctags
+		" by default
+		let check_ctags = 'tags'. ' --version 2>&1|grep Exuberant'
+		if empty(system(check_ctags))
+			return 'null'
+		else
+			return 'tags'
+		endif	
+	else
+		return 'null'
+	endif
+endfunction
+
 if !exists('*system')
 	echomsg 'Taglist: Vim system() built-in function is not available. ' .
                     \ 'Plugin is not loaded.'
@@ -75,38 +81,13 @@ endif
 
 " Location of the exuberant ctags tool
 if !exists('Tlist_Ctags_Cmd')
-	if executable('exuberant-ctags')
-		" On Debian Linux, exuberant ctags is installed
-		" as exuberant-ctags
-		let Tlist_Ctags_Cmd = 'exuberant-ctags'
-	elseif executable('exctags')
-		" On Free-BSD, exuberant ctags is installed as exctags
-		let Tlist_Ctags_Cmd = 'exctags'
-	elseif executable('ctags')
-		let Tlist_Ctags_Cmd = 'ctags'
-	elseif executable('ctags.exe')
-		let Tlist_Ctags_Cmd = 'ctags.exe'
-	elseif executable('tags')
-		let Tlist_Ctags_Cmd = 'tags'
-	else
+	let Tlist_Ctags_Cmd = DetectExuberantCtags()
+	if Tlist_Ctags_Cmd == 'null'
 		echomsg 'Taglist: Exuberant ctags (http://ctags.sf.net) ' .
                         \ 'not found in PATH. Plugin is not loaded.'
 		" Skip loading the plugin
 		let loaded_taglist = 'no'
 		let g:winManagerWindowLayout = "NERDTree"
-	endif
-endif
-
-if !exists('loaded_taglist')
-	" On some systems, like Mac OS X, the old ctags is installed by
-	" default instead of Exuberant Ctags. If this is the case, disable
-	" taglist
-	let check_ctags = Tlist_Ctags_Cmd . ' --version 2>&1|grep Exuberant'
-	"let ctags_version=system("$Tlist_Ctags_Cmd --version 2>&1|grep Exuberant")
-	let ctags_version = system(check_ctags)
-	if empty(ctags_version)
-		let g:winManagerWindowLayout = "NERDTree"
-		let loaded_taglist = 'no'
 	else
 		let g:winManagerWindowLayout = "NERDTree|TagList"
 		" Configurations for taglist
@@ -119,7 +100,65 @@ if !exists('loaded_taglist')
 		set tags+=./.git/tags
 		" for generating ctags tag
 		nnoremap <F5> :!ctags -R -f .tags --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=yes --exclude=.git .<CR>
-	" }}
-
 	endif
 endif
+
+" Open winManager upon entering vim
+autocmd vimenter * WManager
+" An additional empty window always shows up upon entering vim as a result of
+" integrating NERDTree and winManager. Add the following line to fix it.
+autocmd vimenter * q
+
+" Increase winManager width, default is 25
+let g:WinManagerWidth = 30
+
+" Integrate nerdtree into winManager
+let g:NERDTree_title = '[NERDTree]'
+function! NERDTree_Start()
+	execute 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+	return 1
+endfunction
+
+
+
+" Common configurations {{
+syntax enable
+colorscheme elflord
+set number
+
+autocmd FileType c setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab 
+autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
+autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+
+set laststatus=2
+set ruler
+set autoread
+
+" }}
+
+" Key mappings {{
+inoremap <c-h> <Left>
+inoremap <c-j> <Down>
+inoremap <c-k> <Up>
+inoremap <c-l> <Right>
+" Brackets completion
+inoremap { {}<Left>
+inoremap {<CR> {<CR>}<Up><Esc>o
+inoremap {{ {
+
+inoremap ( ()<Left>
+inoremap (( (
+" The following map doesn't work in versions prior to Vim 7.0
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+
+inoremap [ []<Left>
+inoremap [[ [
+
+" The following map doesn't work in versions prior to Vim 7.0
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+
+" }}
+
