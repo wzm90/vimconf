@@ -1,7 +1,10 @@
-This repository contains vim configuration files and several plugins for my daily programming use. 
-So I can maintain a consistent editing environment at different places through this repo.
+This repository contains vim configuration files and several plugins for my daily programming use. So I can maintain a consistent editing environment at different places through this repo.
+
+I use vundle (http://github.com/gmarik/vundle) to manage my vim plugins.
+
 To use this:
   1. git clone --recursive git://github.com/wzm90/vimconf ~/.vim/
-  2. Make a soft link for ~/.vimrc:
-    ln -s ~/.vim/.vimrc ~/.vimrc
-  3. Notice: Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window is disabled in winManager.
+  2. Open Vim, type ":BundleInstall" and vundle will download all required plugins automatically.
+  3. Make a soft link for ~/.vimrc:
+     ln -s ~/.vim/.vimrc ~/.vimrc
+  4. Notice: Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window is disabled in winManager.
