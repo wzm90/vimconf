@@ -129,6 +129,7 @@ syntax enable
 colorscheme elflord
 set number
 
+filetype plugin indent on
 autocmd FileType c setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab 
 autocmd FileType cpp setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
