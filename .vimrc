@@ -108,8 +108,10 @@ endif
 " integrating NERDTree and winManager. Add the following line to fix it.
 autocmd vimenter * if exists(':WManager') | execute ':WManager' | execute ':q' | endif
 
-" Increase winManager width, default is 25
-let g:WinManagerWidth = 30
+" Set the width of NERDTree area, default is 25
+let g:winManagerWidth = 40
+" Quit Vim when user quit editing window and leave only NERDTree/TagList windows.
+let g:persistentBehaviour = 0
 
 " Integrate nerdtree into winManager
 let g:NERDTree_title = '[NERDTree]'
