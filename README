@@ -5,6 +5,9 @@ I use vundle (http://github.com/gmarik/vundle) to manage my vim plugins.
 To use this:
   1. git clone --recursive git://github.com/wzm90/vimconf ~/.vim/
   2. Open Vim, type ":BundleInstall" and vundle will download all required plugins automatically.
-  3. Make a soft link for ~/.vimrc:
+  3. Close Vim and make a soft link for ~/.vimrc:
      ln -s ~/.vim/.vimrc ~/.vimrc
-  4. Notice: Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window is disabled in winManager.
+  4. You can now enjoy using Vim!
+
+Notice:
+  Exuberant ctags is required for TagList. If exuberant ctags is not installed, TagList window is disabled in winManager.
