@@ -104,10 +104,9 @@ if !exists('Tlist_Ctags_Cmd')
 endif
 
 " Open winManager upon entering vim
-autocmd vimenter * WManager
 " An additional empty window always shows up upon entering vim as a result of
 " integrating NERDTree and winManager. Add the following line to fix it.
-autocmd vimenter * q
+autocmd vimenter * if exists(':WManager') | execute ':WManager' | execute ':q' | endif
 
 " Increase winManager width, default is 25
 let g:WinManagerWidth = 30
