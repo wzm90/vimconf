@@ -30,8 +30,8 @@ Bundle 'gmarik/vundle'
 
 " My Bundles
 Bundle 'scrooloose/nerdtree'
-Bundle 'winmanager'
 Bundle 'taglist.vim'
+Bundle 'a.vim'
 "
 
 " Config for my bundles {{
@@ -87,42 +87,25 @@ if !exists('Tlist_Ctags_Cmd')
                         \ 'not found in PATH. Plugin is not loaded.'
 		" Skip loading the plugin
 		let loaded_taglist = 'no'
-		let g:winManagerWindowLayout = "NERDTree"
 	else
-		let g:winManagerWindowLayout = "NERDTree|TagList"
 		" Configurations for taglist
-		let Tlist_Show_One_File = 1
 		let Tlist_Exit_OnlyWindow = 1
+		let Tlist_WinWidth = 31
 		let Tlist_Inc_Winwidth = 1
+		let Tlist_Auto_Update = 1
 		let Tlist_File_Fold_Auto_Close = 1
 		let Tlist_Show_Menu = 1
-		" Config for Ctags
-		set tags+=./.git/tags
-		" for generating ctags tag
-		nnoremap <F5> :!ctags -R -f .tags --c++-kinds=+p --fields=+iaS --extra=+q --tag-relative=yes --exclude=.git .<CR>
+		let Tlist_GainFocus_On_ToggleOpen = 1
+		nnoremap <c-t><c-l> :TlistToggle<cr>
+		inoremap <c-t><c-l> <Esc>:TlistToggle<cr>
 	endif
 endif
 
-" Open winManager upon entering vim
-" An additional empty window always shows up upon entering vim as a result of
-" integrating NERDTree and winManager. Add the following line to fix it.
-autocmd vimenter * if exists(':WManager') | execute ':WManager' | execute ':q' | endif
-
-" Set the width of NERDTree area, default is 25
-let g:winManagerWidth = 40
-" Quit Vim when user quit editing window and leave only NERDTree/TagList windows.
-let g:persistentBehaviour = 0
-
-" Integrate nerdtree into winManager
-let g:NERDTree_title = '[NERDTree]'
-function! NERDTree_Start()
-	execute 'NERDTree'
-endfunction
-
-function! NERDTree_IsValid()
-	return 1
-endfunction
-
+" NERDTree configurations {{
+let NERDTreeWinPos = "right"
+nnoremap <c-n><c-t> :NERDTreeToggle<cr>
+inoremap <c-n><c-t> <Esc>:NERDTreeToggle<cr>
+" }}
 
 
 " Common configurations {{
