@@ -94,8 +94,7 @@ if !exists('Tlist_Ctags_Cmd')
 		let Tlist_Inc_Winwidth=1
 		let Tlist_Auto_Update=1
 		let Tlist_File_Fold_Auto_Close=1
-		let Tlist_Show_Menu=1
-		let Tlist_GainFocus_On_ToggleOpen=1
+		let Tlist_GainFocus_On_ToggleOpen=0
 		nnoremap <c-t><c-l> :TlistToggle<cr>
 		inoremap <c-t><c-l> <Esc>:TlistToggle<cr>
 	endif
