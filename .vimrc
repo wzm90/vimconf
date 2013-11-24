@@ -122,7 +122,8 @@ autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 set laststatus=2
 set ruler
 set autoread
-
+" set foldmethod
+set fdm=indent
 " }}
 
 " Key mappings {{
