@@ -51,7 +51,7 @@ function! DetectExuberantCtags()
 	elseif executable('ctags')
 		" On some OS, ctags is installed instead of exuberant ctags
 		" by default
-		let check_ctags = 'ctags'. ' --version 2>&1|grep Exuberant'
+		let check_ctags='ctags'. ' --version 2>&1|grep Exuberant'
 		if empty(system(check_ctags))
 			return 'null'
 		else
@@ -62,7 +62,7 @@ function! DetectExuberantCtags()
 	elseif executable('tags')
 		" On some OS, ctags is installed instead of exuberant ctags
 		" by default
-		let check_ctags = 'tags'. ' --version 2>&1|grep Exuberant'
+		let check_ctags='tags'. ' --version 2>&1|grep Exuberant'
 		if empty(system(check_ctags))
 			return 'null'
 		else
@@ -76,33 +76,35 @@ endfunction
 if !exists('*system')
 	echomsg 'Taglist: Vim system() built-in function is not available. ' .
                     \ 'Plugin is not loaded.'
-	let loaded_taglist = 'no'
+	let loaded_taglist='no'
 endif
 
 " Location of the exuberant ctags tool
 if !exists('Tlist_Ctags_Cmd')
-	let Tlist_Ctags_Cmd = DetectExuberantCtags()
+	let Tlist_Ctags_Cmd=DetectExuberantCtags()
 	if Tlist_Ctags_Cmd == 'null'
 		echomsg 'Taglist: Exuberant ctags (http://ctags.sf.net) ' .
                         \ 'not found in PATH. Plugin is not loaded.'
 		" Skip loading the plugin
-		let loaded_taglist = 'no'
+		let loaded_taglist='no'
 	else
 		" Configurations for taglist
-		let Tlist_Exit_OnlyWindow = 1
-		let Tlist_WinWidth = 31
-		let Tlist_Inc_Winwidth = 1
-		let Tlist_Auto_Update = 1
-		let Tlist_File_Fold_Auto_Close = 1
-		let Tlist_Show_Menu = 1
-		let Tlist_GainFocus_On_ToggleOpen = 1
+		let Tlist_Exit_OnlyWindow=1
+		let Tlist_WinWidth=31
+		let Tlist_Inc_Winwidth=1
+		let Tlist_Auto_Update=1
+		let Tlist_File_Fold_Auto_Close=1
+		let Tlist_Show_Menu=1
+		let Tlist_GainFocus_On_ToggleOpen=1
 		nnoremap <c-t><c-l> :TlistToggle<cr>
 		inoremap <c-t><c-l> <Esc>:TlistToggle<cr>
 	endif
 endif
 
 " NERDTree configurations {{
-let NERDTreeWinPos = "right"
+let NERDTreeWinPos="right"
+" ignore *.o file
+let NERDTreeIgnore=['.o$[[file]]']
 nnoremap <c-n><c-t> :NERDTreeToggle<cr>
 inoremap <c-n><c-t> <Esc>:NERDTreeToggle<cr>
 " }}
