@@ -122,8 +122,6 @@ autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
 set laststatus=2
 set ruler
 set autoread
-" set foldmethod
-set fdm=indent
 " }}
 
 " Key mappings {{
@@ -135,6 +133,8 @@ inoremap <c-l> <Right>
 inoremap { {}<Left>
 inoremap {<CR> {<CR>}<Up><Esc>o
 inoremap {{ {
+" The following map doesn't work in versions prior to Vim 7.0
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
 
 inoremap ( ()<Left>
 inoremap (( (
@@ -143,7 +143,6 @@ inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 
 inoremap [ []<Left>
 inoremap [[ [
-
 " The following map doesn't work in versions prior to Vim 7.0
 inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
