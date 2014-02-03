@@ -32,6 +32,7 @@ Bundle 'gmarik/vundle'
 Bundle 'scrooloose/nerdtree'
 Bundle 'taglist.vim'
 Bundle 'a.vim'
+Bundle 'clang-complete'
 "
 
 " Config for my bundles {{
