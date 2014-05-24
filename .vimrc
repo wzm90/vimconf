@@ -35,7 +35,7 @@ Bundle 'a.vim'
 Bundle 'clang-complete'
 "
 
-" Config for my bundles {{
+" Config for my bundles
 
 " Detect if the user has installed exuberant ctags
 " If not, do not load Taglist
@@ -101,16 +101,16 @@ if !exists('Tlist_Ctags_Cmd')
 	endif
 endif
 
-" NERDTree configurations {{
+" NERDTree configurations {
 let NERDTreeWinPos="right"
 " ignore *.o file
 let NERDTreeIgnore=['.o$[[file]]']
 nnoremap <c-n><c-t> :NERDTreeToggle<cr>
 inoremap <c-n><c-t> <Esc>:NERDTreeToggle<cr>
-" }}
+" }
 
 
-" Common configurations {{
+" Common configurations {
 syntax enable
 colorscheme elflord
 set number
@@ -119,13 +119,14 @@ filetype plugin indent on
 autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab 
 autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
+autocmd FileType php setlocal ts=2 sts=2 sw=2 expandtab
 
 set laststatus=2
 set ruler
 set autoread
-" }}
+" }
 
-" Key mappings {{
+" Key mappings
 inoremap <c-h> <Left>
 inoremap <c-j> <Down>
 inoremap <c-k> <Up>
@@ -147,5 +148,11 @@ inoremap [[ [
 " The following map doesn't work in versions prior to Vim 7.0
 inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 
-" }}
+"quotation marks completion
+inoremap ' ''<Left>
+inoremap '' '
+inoremap " ""<Left>
+inoremap "" "
+
+"
 
