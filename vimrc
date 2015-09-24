@@ -12,10 +12,12 @@ colorscheme elflord
 set number
 
 filetype plugin indent on
-autocmd FileType c setlocal ts=4 sts=4 sw=4 expandtab 
-autocmd FileType cpp setlocal ts=4 sts=4 sw=4 expandtab
+set expandtab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+
 autocmd FileType python setlocal ts=4 sts=4 sw=4 expandtab
-autocmd FileType php setlocal ts=2 sts=2 sw=2 expandtab
 
 set laststatus=2
 set ruler
